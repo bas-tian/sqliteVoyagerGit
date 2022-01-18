@@ -29,6 +29,9 @@ Route::get('/', function () {
 //Stripe
 Route::get('stripe', [StripeController::class, 'stripe']);
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
+//Stripe 2
+Route::get('str', [StripeController::class, 'index']);
+Route::post('str', [StripeController::class, 'makePayment'])->name('make-payment');
 
 
 //Visitor
