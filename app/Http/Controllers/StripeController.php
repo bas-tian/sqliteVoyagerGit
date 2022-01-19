@@ -39,17 +39,17 @@ class StripeController extends Controller
     }
     public function index()
     {
-        return view('welcome');
+        return view('str');
     }
 
     public function makePayment(Request $request)
     {
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         Stripe\Charge::create ([
-            "amount" => 120 * 100,
-            "currency" => "inr",
+            "amount" => 100 * 100,
+            "currency" => "ron",
             "source" => $request->stripeToken,
-            "description" => "Make payment and chill."
+            "description" => "Subscribed for 3 months."
         ]);
 
         Session::flash('success', 'Payment successfully made.');

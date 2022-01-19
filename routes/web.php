@@ -30,6 +30,7 @@ Route::get('/', function () {
 Route::get('stripe', [StripeController::class, 'stripe']);
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
 //Stripe 2
+//4242424242424242
 Route::get('str', [StripeController::class, 'index']);
 Route::post('str', [StripeController::class, 'makePayment'])->name('make-payment');
 
