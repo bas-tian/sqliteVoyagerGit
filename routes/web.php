@@ -40,6 +40,7 @@ Route::get('/dash/{chap}', 'App\Http\Controllers\TestController@show')->name('da
 Route::get('/test/{chap}{dif}', 'App\Http\Controllers\TestController@shows')->name('test.shows');
 Route::post('/dash', 'App\Http\Controllers\TestController@testResult')->name('dash.store');
 //Route::get('/results/{result_id}', 'App\Http\Controllers\TestController@result')->name('results.show');
+Route::get('/subs', 'App\Http\Controllers\ProfilesController@setTimeline')->name('timeline');
 
 
 //User

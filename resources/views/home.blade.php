@@ -16,6 +16,7 @@
             <div class="pt-4 font-weight-bold">{{ $user->profile->title ?? 'N/A' }}</div>
             <div>{{ $user->profile->description ?? 'N/A' }}</div>
             <div class="font-weight-bold"><a href="#">{{ $user->profile->url ?? 'N/A' }}</a></div>
+            <div class="font-weight-bold"><a href="{{ route('timeline') }}">Home</a></div>
         </div>
     </div>
     <div class="row pt-5">

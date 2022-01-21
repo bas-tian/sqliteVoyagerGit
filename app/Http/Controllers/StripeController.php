@@ -54,6 +54,8 @@ class StripeController extends Controller
 
         Session::flash('success', 'Payment successfully made.');
 
+
+
         return back();
     }
 }
