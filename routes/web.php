@@ -19,6 +19,11 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
+//SubbedUser
+Route::group(['middleware' => ['auth', 'subbed']], function () {
+    Route::get('/mid', [App\Http\Controllers\HomeController::class, 'midd']);
+});
+
 Auth::routes();
 
 //Visitor

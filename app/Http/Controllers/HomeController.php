@@ -32,4 +32,8 @@ class HomeController extends Controller
         //dd($comQuestions);
         return view('main', compact('comQuestions'));
     }
+    public function midd()
+    {
+        return view('mid');
+    }
 }

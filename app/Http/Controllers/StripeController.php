@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\ProfilesController;
 use Session;
 use Stripe;
 
@@ -13,16 +14,12 @@ class StripeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function stripe()
     {
         return view('stripe');
     }
 
-    /**
-     * success response method.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function stripePost(Request $request)
     {
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -45,7 +42,7 @@ class StripeController extends Controller
     public function makePayment(Request $request)
     {
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-        Stripe\Charge::create ([
+        $charge = Stripe\Charge::create ([
             "amount" => 100 * 100,
             "currency" => "ron",
             "source" => $request->stripeToken,
@@ -54,7 +51,10 @@ class StripeController extends Controller
 
         Session::flash('success', 'Payment successfully made.');
 
-
+        if($charge->status == 'succeeded') {
+            $updateProfile = new ProfilesController();
+            $updateProfile->setTimeline($charge->status);
+        }
 
         return back();
     }
