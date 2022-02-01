@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Carbon\Carbon;
 
 class ProfilesController extends Controller
@@ -21,38 +23,29 @@ class ProfilesController extends Controller
 
     public function setTimeline($data)
     {
+        $uId = Auth::user()->id;
 
         $today = Carbon::today();
-        $todayDate = $today->format('Y-m-d H:i:s');
+        $startDate = $today->format('Y-m-d H:i:s');
         $endDate = $today->addMonths(6)->format('Y-m-d H:i:s');
 
-        DB::table('payments')->insert(['user_id'=>1,'start_sub_date'=>$todayDate, 'end_sub_date'=>$endDate]);
+        $record = DB::table('payments')->where('user_id', $uId)->first();
 
-        $pay = DB::select('select * from payments');
+        //dd($record);
 
-        dd($pay);
-
-        $startTime = \Carbon\Carbon::createFromFormat('H:i a', '08:00 AM');
-        $endTime = \Carbon\Carbon::createFromFormat('H:i a', '07:00 PM');
-        $currentTime = \Carbon\Carbon::now();
-
-        if($currentTime->between($startTime, $endTime, true)){
-            dd('In Between');
+        if($record){
+            DB::table('payments') ->where('user_id', $uId) ->limit(1) ->update( [ 'start_sub_date' => $startDate, 'end_sub_date' => $endDate ]);
         }else{
-            dd('In Not Between');
+            DB::table('payments')->insert(['user_id'=>$uId,'start_sub_date'=>$startDate, 'end_sub_date'=>$endDate]);
         }
 
-        ///////////////////
-        $t = Carbon::now()->toDateTimeString();
-        //$future = $time->add(new DateInterval('P20Y'));
-        //DB::table('payments')->insert(['user_id'=>1,'start_sub_date'=>$time, 'end_sub_date'=>$time]);
-
-
-        //DB::insert('insert into payments ( user_id, start_sub_date, end_sub_date) values ($user->id, now(), now())');
-
         $pay = DB::select('select * from payments');
 
-        dd($ttt);
-        //dd($time);
+        //dd($pay);
+
+        ///////////////////
+        //$res = DB::getSchemaBuilder()->getColumnListing('payments');
+        //DB::table('payments')->delete();
+
     }
 }

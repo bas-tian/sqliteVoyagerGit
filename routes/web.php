@@ -22,6 +22,7 @@ Route::group(['prefix' => 'admin'], function () {
 //SubbedUser
 Route::group(['middleware' => ['auth', 'subbed']], function () {
     Route::get('/mid', [App\Http\Controllers\HomeController::class, 'midd']);
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
 Auth::routes();
@@ -29,12 +30,13 @@ Auth::routes();
 //Visitor
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+
+Route::view('/about', 'about');
+Route::view('/price', 'price');
+Route::view('/contact', 'contact');
 
 //Stripe
-Route::get('stripe', [StripeController::class, 'stripe']);
-Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
-//Stripe 2
 //4242424242424242
 Route::get('str', [StripeController::class, 'index']);
 Route::post('str', [StripeController::class, 'makePayment'])->name('make-payment');
@@ -45,14 +47,14 @@ Route::get('/dash/{chap}', 'App\Http\Controllers\TestController@show')->name('da
 Route::get('/test/{chap}{dif}', 'App\Http\Controllers\TestController@shows')->name('test.shows');
 Route::post('/dash', 'App\Http\Controllers\TestController@testResult')->name('dash.store');
 //Route::get('/results/{result_id}', 'App\Http\Controllers\TestController@result')->name('results.show');
-Route::get('/subs', 'App\Http\Controllers\ProfilesController@setTimeline')->name('timeline');
+Route::get('/subs', 'App\Http\Controllers\ProfilesController@setTimeline');
 
 
 //User
 Route::get('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'index'])->name('profile.show');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//Testing
 Route::get('/tt', [App\Http\Controllers\TestController::class, 'index']);
 
 Route::get('/table', [App\Http\Controllers\JoinTableController::class, 'index']);

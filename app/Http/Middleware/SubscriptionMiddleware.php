@@ -6,6 +6,7 @@ use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SubscriptionMiddleware
 {
@@ -20,6 +21,23 @@ class SubscriptionMiddleware
     {
         if(Auth::user()){
             $dude = Auth::user()->id;
+
+            $currentTime = \Carbon\Carbon::now();
+            $record = DB::table('payments')->where('user_id', $dude)->first();
+
+            if($record && $currentTime->between($record->start_sub_date, $record->end_sub_date, true)){
+                return $next($request);
+            }else{
+                abort(403, 'No Access');
+            }
+
+
+        }else{
+            abort(403, 'No Access');
+        }
+        //abort(403, 'No Access');
+        //return $next($request);
+        /*
             $user = User::findOrFail($dude);
             $username = $user->username;
             if($username == 't'){
@@ -27,10 +45,6 @@ class SubscriptionMiddleware
             }else{
                 abort(403, 'No Access');
             }
-        }else{
-            abort(403, 'No Access');
-        }
-        //abort(403, 'No Access');
-        //return $next($request);
+         */
     }
 }

@@ -14,31 +14,18 @@ class StripeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function stripe()
+    public function __construct()
     {
-        return view('stripe');
+        $this->middleware('auth');
     }
 
-    public function stripePost(Request $request)
-    {
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-        Stripe\Charge::create ([
-            "amount" => 100 * 100,
-            "currency" => "usd",
-            "source" => $request->stripeToken,
-            "description" => "This payment is tested purpose phpcodingstuff.com"
-        ]);
 
-        Session::flash('success', 'Payment successful!');
-
-        return back();
-    }
     public function index()
     {
         return view('str');
     }
 
+    //4242424242424242
     public function makePayment(Request $request)
     {
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -46,7 +33,7 @@ class StripeController extends Controller
             "amount" => 100 * 100,
             "currency" => "ron",
             "source" => $request->stripeToken,
-            "description" => "Subscribed for 3 months."
+            "description" => "Subscribed for 6 months."
         ]);
 
         Session::flash('success', 'Payment successfully made.');
