@@ -27,7 +27,7 @@ class ProfilesController extends Controller
 
         $today = Carbon::today();
         $startDate = $today->format('Y-m-d H:i:s');
-        $endDate = $today->addMonths(6)->format('Y-m-d H:i:s');
+        $endDate = $today->addMonths($data)->format('Y-m-d H:i:s');
 
         $record = DB::table('payments')->where('user_id', $uId)->first();
 

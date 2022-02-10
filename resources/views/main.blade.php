@@ -4,7 +4,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <div class="card p-2 pt-3 mb-2">
+                <h3>Subbed until {{ $endDate }}</h3>
+            </div>
             <div class="card">
+
                 <div class="card-header">Main Page</div>
 
                 <div class="card-body">

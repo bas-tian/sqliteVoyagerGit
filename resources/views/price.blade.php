@@ -16,9 +16,26 @@
                             <span>Rezidentiat.com</span> oferă posibilitatea evaluării continue din fiecare capitol al tematicii, dar și simularea examenului de rezidențiat.
                         </div>
 
-                        <a href="{{ url('str') }}" class="ml-1 underline">
-                            {{ __('Subscribe') }}
-                        </a>
+
+                        <button class="btn btn-primary">
+                            <a href="{{ url('str/25') }}" class="text-light">
+                                {{ __('Subscribe for 3 months') }}
+                            </a>
+                        </button>
+
+
+                        <button class="btn btn-primary">
+                            <a href="{{ url('str/50') }}" class="text-light">
+                                {{ __('Subscribe for 6 months') }}
+                            </a>
+                        </button>
+
+                        <button class="btn btn-primary">
+                            <a href="{{ url('str/100') }}" class="text-light">
+                                {{ __('Subscribe for 1 year') }}
+                            </a>
+                        </button>
+
                     </div>
                 </div>
 

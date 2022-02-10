@@ -38,8 +38,8 @@ Route::view('/contact', 'contact');
 
 //Stripe
 //4242424242424242
-Route::get('str', [StripeController::class, 'index']);
-Route::post('str', [StripeController::class, 'makePayment'])->name('make-payment');
+Route::get('str/{amount}', [StripeController::class, 'index']);
+Route::post('pay/{amount}', [StripeController::class, 'makePayment'])->name('make-payment');
 
 
 //Visitor
